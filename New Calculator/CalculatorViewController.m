@@ -237,28 +237,28 @@
          {
             case 11:
                 answer = theFirstOperandValue/theSecondOperandValue;
-                result = [NSString stringWithFormat:@"%f", answer];
+                result = [NSString stringWithFormat:@"%g", answer];
                 _mainLabel.text = result;
                 equalToTapped = true;
                 break;
 
             case 12:
                 answer = theFirstOperandValue*theSecondOperandValue;
-                result = [NSString stringWithFormat:@"%f", answer];
+                result = [NSString stringWithFormat:@"%g", answer];
                 _mainLabel.text = result;
                 equalToTapped = true;
                 break;
                 
             case 13:
                 answer = theFirstOperandValue+theSecondOperandValue;
-                result = [NSString stringWithFormat:@"%f", answer];
+                result = [NSString stringWithFormat:@"%g", answer];
                 _mainLabel.text = result;
                 equalToTapped = true;
                 break;
                 
             case 14:
                 answer = theFirstOperandValue-theSecondOperandValue;
-                result = [NSString stringWithFormat:@"%f", answer];
+                result = [NSString stringWithFormat:@"%g", answer];
                 _mainLabel.text = result;
                 equalToTapped = true;
                 break;
@@ -273,25 +273,25 @@
          {
              case 11:
                  answer = answer/theSecondOperandValue;
-                 result = [NSString stringWithFormat:@"%f", answer];
+                 result = [NSString stringWithFormat:@"%g", answer];
                  _mainLabel.text = result;
                  break;
                  
              case 12:
                  answer = answer*theSecondOperandValue;
-                 result = [NSString stringWithFormat:@"%f", answer];
+                 result = [NSString stringWithFormat:@"%g", answer];
                  _mainLabel.text = result;
                  break;
                  
              case 13:
                  answer = answer+theSecondOperandValue;
-                 result = [NSString stringWithFormat:@"%f", answer];
+                 result = [NSString stringWithFormat:@"%g", answer];
                  _mainLabel.text = result;
                  break;
                  
              case 14:
                  answer = answer-theSecondOperandValue;
-                 result = [NSString stringWithFormat:@"%f", answer];
+                 result = [NSString stringWithFormat:@"%g", answer];
                  _mainLabel.text = result;
                  break;
            }
