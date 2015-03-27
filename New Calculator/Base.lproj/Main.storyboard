@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Calculator View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="CalculatorViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -72,6 +72,9 @@
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="258" y="200" width="50" height="50"/>
                                 </variation>
+                                <connections>
+                                    <action selector="operationButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HIC-ed-8p3"/>
+                                </connections>
                             </button>
                             <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7EN-8y-FFt">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -122,6 +125,9 @@
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="258" y="262" width="50" height="50"/>
                                 </variation>
+                                <connections>
+                                    <action selector="operationButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tXB-ps-vKu"/>
+                                </connections>
                             </button>
                             <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ca9-2p-S7h">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -161,17 +167,6 @@
                                 <connections>
                                     <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zIW-rJ-9MC"/>
                                 </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GcV-OS-Rgj">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <color key="backgroundColor" red="1" green="0.90441939179999997" blue="0.50855642280000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="+">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="258" y="325" width="50" height="50"/>
-                                </variation>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="11E-Qo-X14">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -256,6 +251,23 @@
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="260" y="386" width="50" height="50"/>
                                 </variation>
+                                <connections>
+                                    <action selector="operationButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nPP-M8-apn"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GcV-OS-Rgj">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.90441939179999997" blue="0.50855642280000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="+">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="258" y="325" width="50" height="50"/>
+                                </variation>
+                                <connections>
+                                    <action selector="operationButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MGA-n8-kGZ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -273,7 +285,6 @@
                                 <exclude reference="ca9-2p-S7h"/>
                                 <exclude reference="VuT-Sn-tFT"/>
                                 <exclude reference="wiL-fQ-JZs"/>
-                                <exclude reference="GcV-OS-Rgj"/>
                                 <exclude reference="11E-Qo-X14"/>
                                 <exclude reference="6A4-iB-fsZ"/>
                                 <exclude reference="v8N-yd-3wo"/>
@@ -281,6 +292,7 @@
                                 <exclude reference="udD-FF-4HF"/>
                                 <exclude reference="MNh-mW-jyf"/>
                                 <exclude reference="fIG-v9-AGb"/>
+                                <exclude reference="GcV-OS-Rgj"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -297,7 +309,6 @@
                                 <include reference="ca9-2p-S7h"/>
                                 <include reference="VuT-Sn-tFT"/>
                                 <include reference="wiL-fQ-JZs"/>
-                                <include reference="GcV-OS-Rgj"/>
                                 <include reference="11E-Qo-X14"/>
                                 <include reference="6A4-iB-fsZ"/>
                                 <include reference="v8N-yd-3wo"/>
@@ -305,6 +316,7 @@
                                 <include reference="udD-FF-4HF"/>
                                 <include reference="MNh-mW-jyf"/>
                                 <include reference="fIG-v9-AGb"/>
+                                <include reference="GcV-OS-Rgj"/>
                             </mask>
                         </variation>
                     </view>

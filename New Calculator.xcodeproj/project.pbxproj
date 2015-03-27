@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		33DC35511AC49E8800FC09EA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 33DC35501AC49E8800FC09EA /* main.m */; };
 		33DC35541AC49E8800FC09EA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 33DC35531AC49E8800FC09EA /* AppDelegate.m */; };
-		33DC35571AC49E8800FC09EA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33DC35561AC49E8800FC09EA /* ViewController.m */; };
+		33DC35571AC49E8800FC09EA /* CalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33DC35561AC49E8800FC09EA /* CalculatorViewController.m */; };
 		33DC355A1AC49E8800FC09EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33DC35581AC49E8800FC09EA /* Main.storyboard */; };
 		33DC355C1AC49E8800FC09EA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33DC355B1AC49E8800FC09EA /* Images.xcassets */; };
 		33DC355F1AC49E8800FC09EA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33DC355D1AC49E8800FC09EA /* LaunchScreen.xib */; };
@@ -32,8 +32,8 @@
 		33DC35501AC49E8800FC09EA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		33DC35521AC49E8800FC09EA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		33DC35531AC49E8800FC09EA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		33DC35551AC49E8800FC09EA /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		33DC35561AC49E8800FC09EA /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		33DC35551AC49E8800FC09EA /* CalculatorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CalculatorViewController.h; sourceTree = "<group>"; };
+		33DC35561AC49E8800FC09EA /* CalculatorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalculatorViewController.m; sourceTree = "<group>"; };
 		33DC35591AC49E8800FC09EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		33DC355B1AC49E8800FC09EA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		33DC355E1AC49E8800FC09EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -83,8 +83,8 @@
 			children = (
 				33DC35521AC49E8800FC09EA /* AppDelegate.h */,
 				33DC35531AC49E8800FC09EA /* AppDelegate.m */,
-				33DC35551AC49E8800FC09EA /* ViewController.h */,
-				33DC35561AC49E8800FC09EA /* ViewController.m */,
+				33DC35551AC49E8800FC09EA /* CalculatorViewController.h */,
+				33DC35561AC49E8800FC09EA /* CalculatorViewController.m */,
 				33DC35581AC49E8800FC09EA /* Main.storyboard */,
 				33DC355B1AC49E8800FC09EA /* Images.xcassets */,
 				33DC355D1AC49E8800FC09EA /* LaunchScreen.xib */,
@@ -219,7 +219,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33DC35571AC49E8800FC09EA /* ViewController.m in Sources */,
+				33DC35571AC49E8800FC09EA /* CalculatorViewController.m in Sources */,
 				33DC35541AC49E8800FC09EA /* AppDelegate.m in Sources */,
 				33DC35511AC49E8800FC09EA /* main.m in Sources */,
 			);
@@ -414,6 +414,7 @@
 				33DC35701AC49E8800FC09EA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		33DC35711AC49E8800FC09EA /* Build configuration list for PBXNativeTarget "New CalculatorTests" */ = {
 			isa = XCConfigurationList;
@@ -422,6 +423,7 @@
 				33DC35731AC49E8800FC09EA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
