@@ -22,13 +22,10 @@
     BOOL equalToTapped;
     BOOL decimalButtonTapped;
     int operationButtonTagValue;          //To identify which operaiton button is tapped
-
-    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.mainLabel.text = @"0";
     result = @"0";
     input1 = @"0";
@@ -37,8 +34,6 @@
     equalToTapped = false;
     decimalButtonTapped = false;
     operationButtonTapped = false;
-    
-    // Do any additional setup after loading the view, typically from a nib.
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,11 +47,10 @@
 {
     if (operationButtonTapped == false)             //This is input1
     {
-        input1 = self.mainLabel.text;
         UIButton *numberButton = (id) sender;
-        int tag = numberButton.tag;
-        NSString *tempBuffer1 = [NSString stringWithFormat:@"%i",tag];
-        if ([self.mainLabel.text isEqual: @"0"])                //first digit of first number entered
+        NSUInteger tag = numberButton.tag;
+        NSString *tempBuffer1 = [NSString stringWithFormat:@"%lu",(unsigned long)tag];
+        if ([input1 isEqual: @"0"])                //first digit of first number entered
         {
             input1 = [input1 substringFromIndex:1];
             input1 = [input1 stringByAppendingString:tempBuffer1];
@@ -73,10 +67,9 @@
     else                //This is input2
     {
        
-        //input2 = self.mainLabel.text;
         UIButton *numberButton = (id) sender;
-        int tag = numberButton.tag;
-        NSString *tempBuffer1 = [NSString stringWithFormat:@"%i",tag];
+        NSUInteger tag = numberButton.tag;
+        NSString *tempBuffer1 = [NSString stringWithFormat:@"%lu",(unsigned long)tag];
         if ([self.mainLabel.text isEqual: input1])                //first digit of second number entered
         {
             input2 = @"0";
@@ -112,9 +105,8 @@
 //Uses Tag value of operators to decide which operation to perform
 - (IBAction)operationButtonTapped:(id)sender
 {
-   
     UIButton *operationButton = (id) sender;
-    int tag = operationButton.tag;
+    NSUInteger tag = operationButton.tag;
     input1 = _mainLabel.text;
     
     operationButtonTapped = true;
@@ -152,7 +144,7 @@
  - (IBAction)signChangeOperatorTapped:(id)sender
  {
 
-     if ([self.mainLabel.text  isEqual: @"0"])
+     if ([input1  isEqual: @"0"])
          {
              self.mainLabel.text = @"0";
          }
@@ -182,7 +174,6 @@
 {
     if (operationButtonTapped == false) //this is input 1
         {
-            input1 = _mainLabel.text;
             if (decimalButtonTapped == false) // decimal is tapped first time for input1
            {
             input1 = [input1 stringByAppendingFormat:@"."];
@@ -196,9 +187,9 @@
             }
 
         }
-        else                //this is input 2
+        else                    //this is input 2
         {
-            input2 = _mainLabel.text;
+           
             if (decimalButtonTapped == false) //decimal is tapped first time for input2
             {
             input2 = [input2 stringByAppendingString:@"."];
@@ -215,10 +206,26 @@
 #pragma mark- EqualToButtonTapped
 - (IBAction)equalsToIsTapped:(id)sender
 {
+    
+
+    
+    
     NSString *str1 = input1;
     double theFirstOperandValue = [str1 floatValue];
+ //input2 = input1;
     NSString *str2 = input2;
     double theSecondOperandValue = [str2 floatValue];
+    
+    if (theSecondOperandValue != 0)
+    {
+        theSecondOperandValue = theSecondOperandValue;
+    }
+    else
+    {
+        theSecondOperandValue = theFirstOperandValue;
+    }
+
+    
     double answer;
      if (equalToTapped == false)
      {
