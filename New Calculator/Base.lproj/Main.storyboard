@@ -50,6 +50,9 @@
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="148" y="200" width="50" height="50"/>
                                 </variation>
+                                <connections>
+                                    <action selector="signChangeOperatorTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ogs-cr-bMv"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zBw-jq-Nja">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>

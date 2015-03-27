@@ -63,7 +63,7 @@
             _mainLabel.text = input1;
             NSLog(@"input 1 first digit is: %@", input1);
         }
-        else
+        else    //concate other digits to the first digit entered from above
         {
             input1 = [input1 stringByAppendingString:tempBuffer1];
             _mainLabel.text = input1;
@@ -73,7 +73,7 @@
     else                //This is input2
     {
        
-       // input2 = self.mainLabel.text;
+        //input2 = self.mainLabel.text;
         UIButton *numberButton = (id) sender;
         int tag = numberButton.tag;
         NSString *tempBuffer1 = [NSString stringWithFormat:@"%i",tag];
@@ -112,13 +112,13 @@
 //Uses Tag value of operators to decide which operation to perform
 - (IBAction)operationButtonTapped:(id)sender
 {
-    BOOL performOperation;
+   
     UIButton *operationButton = (id) sender;
     int tag = operationButton.tag;
+    input1 = _mainLabel.text;
     
     operationButtonTapped = true;
-    input1 = _mainLabel.text;
-    performOperation = true;
+
     decimalButtonTapped = false;
     
     if (operationButtonTapped)
@@ -147,12 +147,43 @@
     }
 }
 
-#pragma mark- DecimalButtontapped
+#pragma mark- SignChangeOperatorTapped
+
+ - (IBAction)signChangeOperatorTapped:(id)sender
+ {
+
+     if ([self.mainLabel.text  isEqual: @"0"])
+         {
+             self.mainLabel.text = @"0";
+         }
+     else
+        {
+            if (operationButtonTapped == false)  //This is input1
+             {
+                 float temp = [self.mainLabel.text floatValue];
+                 temp  = -(temp);
+                 input1 = [NSString stringWithFormat:@"%g",temp];
+                 _mainLabel.text = input1;
+             }
+            else  //This is input 2
+                 {
+                 float temp = [self.mainLabel.text floatValue];
+                 temp  = -(temp);
+                 input2 = [NSString stringWithFormat:@"%g",temp];
+                 _mainLabel.text = input2;
+         }
+     }
+ }
+
+
+
+#pragma mark- DecimalButtonTapped
 - (IBAction)decimalButtonTapped:(id)sender
 {
-       if (operationButtonTapped == false) //this is input 1
+    if (operationButtonTapped == false) //this is input 1
         {
-           if (decimalButtonTapped == false) // decimal is tapped first time for input1
+            input1 = _mainLabel.text;
+            if (decimalButtonTapped == false) // decimal is tapped first time for input1
            {
             input1 = [input1 stringByAppendingFormat:@"."];
             _mainLabel.text = input1;
@@ -167,10 +198,12 @@
         }
         else                //this is input 2
         {
+            input2 = _mainLabel.text;
             if (decimalButtonTapped == false) //decimal is tapped first time for input2
             {
             input2 = [input2 stringByAppendingString:@"."];
             _mainLabel.text = input2;
+                               decimalButtonTapped = true;
             }
             else
             {
@@ -178,50 +211,6 @@
             }
         }
 }
-   /*
- 
- #pragma mark- DecimalButtontapped
- - (IBAction)decimalButtonTapped:(id)sender
- {
- if (decimalButtonTapped == false)      // decimal button is tapped first time
- 
- {
- decimalButtonTapped = true;
- if (operationButtonTapped == false) //this is input 1
- {
- 
- input1 = [input1 stringByAppendingFormat:@"."];
- _mainLabel.text = input1;
- NSLog(@"the decimal formatted string is: %@", input1);
- }
- else                //this is input 2
- {
- input2 = [input2 stringByAppendingString:@"."];
- _mainLabel.text = input2;
- }
- }
- else             //decimal button is tapped again
- {
- if (operationButtonTapped == false) //this is input 1
- {
- _mainLabel.text = input1;
- }
- else                //this is input 2
- {
- _mainLabel.text = input2;
- }
- 
- }
- decimalButtonTapped = true;
- 
- }
-}
- 
-*/
-    
-    
-
-
 
 #pragma mark- EqualToButtonTapped
 - (IBAction)equalsToIsTapped:(id)sender
