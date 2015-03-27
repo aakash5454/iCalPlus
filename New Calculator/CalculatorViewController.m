@@ -20,16 +20,24 @@
     NSString *result;                     //To store operation result
     BOOL operationButtonTapped;           //
     BOOL equalToTapped;
+    BOOL decimalButtonTapped;
     int operationButtonTagValue;          //To identify which operaiton button is tapped
 
     
 }
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-     self.mainLabel.text = @"0";
+    
+    self.mainLabel.text = @"0";
+    result = @"0";
+    input1 = @"0";
+    input2 = @"0";
     operationButtonTapped = false;
+    equalToTapped = false;
+    decimalButtonTapped = false;
+    operationButtonTapped = false;
+    
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -38,6 +46,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark- NumericButtonTapped
 // Tapping on any Numeric Button from 0-9 using tag values
 - (IBAction)buttonTapped:(id)sender
 {
@@ -86,6 +95,8 @@
         
 }
 
+#pragma mark- ClearButtonIsTapped
+// A/C button on calculator to reset the calculator & display
 - (IBAction)clearTapped:(id)sender {
     self.mainLabel.text = @"0";
     result = @"0";
@@ -93,41 +104,40 @@
     input2 = @"0";
     operationButtonTapped = false;
     equalToTapped = false;
-    
+    decimalButtonTapped = false;
     operationButtonTapped = false;
 }
 
+#pragma mark- operationButtonTapped
+//Uses Tag value of operators to decide which operation to perform
 - (IBAction)operationButtonTapped:(id)sender
 {
+    BOOL performOperation;
     UIButton *operationButton = (id) sender;
     int tag = operationButton.tag;
+    
     operationButtonTapped = true;
-    BOOL performOperation;
+    input1 = _mainLabel.text;
+    performOperation = true;
+    decimalButtonTapped = false;
+    
     if (operationButtonTapped)
     {
         switch (tag)
         {
             case 11: //division
-                input1 = _mainLabel.text;
-                performOperation = true;
                 operationButtonTagValue = 11;
                 break;
                 
             case 12:  //multiplication
-                input1 = _mainLabel.text;
-                performOperation = true;
                 operationButtonTagValue = 12;
                 break;
             
             case 13:  //addition
-                input1 = _mainLabel.text;
-                performOperation = true;
                 operationButtonTagValue = 13;
                 break;
                 
             case 14:  //subtraction
-                input1 = _mainLabel.text;
-                performOperation = true;
                 operationButtonTagValue = 14;
                 break;
                 
@@ -137,6 +147,83 @@
     }
 }
 
+#pragma mark- DecimalButtontapped
+- (IBAction)decimalButtonTapped:(id)sender
+{
+       if (operationButtonTapped == false) //this is input 1
+        {
+           if (decimalButtonTapped == false) // decimal is tapped first time for input1
+           {
+            input1 = [input1 stringByAppendingFormat:@"."];
+            _mainLabel.text = input1;
+            NSLog(@"the decimal formatted string is: %@", input1);
+               decimalButtonTapped = true;
+           }
+            else
+            {
+                _mainLabel.text = input1;
+            }
+
+        }
+        else                //this is input 2
+        {
+            if (decimalButtonTapped == false) //decimal is tapped first time for input2
+            {
+            input2 = [input2 stringByAppendingString:@"."];
+            _mainLabel.text = input2;
+            }
+            else
+            {
+                _mainLabel.text = input2;
+            }
+        }
+}
+   /*
+ 
+ #pragma mark- DecimalButtontapped
+ - (IBAction)decimalButtonTapped:(id)sender
+ {
+ if (decimalButtonTapped == false)      // decimal button is tapped first time
+ 
+ {
+ decimalButtonTapped = true;
+ if (operationButtonTapped == false) //this is input 1
+ {
+ 
+ input1 = [input1 stringByAppendingFormat:@"."];
+ _mainLabel.text = input1;
+ NSLog(@"the decimal formatted string is: %@", input1);
+ }
+ else                //this is input 2
+ {
+ input2 = [input2 stringByAppendingString:@"."];
+ _mainLabel.text = input2;
+ }
+ }
+ else             //decimal button is tapped again
+ {
+ if (operationButtonTapped == false) //this is input 1
+ {
+ _mainLabel.text = input1;
+ }
+ else                //this is input 2
+ {
+ _mainLabel.text = input2;
+ }
+ 
+ }
+ decimalButtonTapped = true;
+ 
+ }
+}
+ 
+*/
+    
+    
+
+
+
+#pragma mark- EqualToButtonTapped
 - (IBAction)equalsToIsTapped:(id)sender
 {
     NSString *str1 = input1;
@@ -210,6 +297,7 @@
            }
       }
 }
+
 
 
 @end
