@@ -17,7 +17,12 @@
     NSString *input1;                     //To store users First Input
     NSString *input2;                     //To store users third Input
     NSString *tempBuffer;                 //
-    BOOL operationButtonTapped;
+    NSString *result;                     //To store operation result
+    BOOL operationButtonTapped;           //
+    BOOL equalToTapped;
+    int operationButtonTagValue;          //To identify which operaiton button is tapped
+
+    
 }
 
 
@@ -83,6 +88,12 @@
 
 - (IBAction)clearTapped:(id)sender {
     self.mainLabel.text = @"0";
+    result = @"0";
+    input1 = @"0";
+    input2 = @"0";
+    operationButtonTapped = false;
+    equalToTapped = false;
+    
     operationButtonTapped = false;
 }
 
@@ -91,24 +102,33 @@
     UIButton *operationButton = (id) sender;
     int tag = operationButton.tag;
     operationButtonTapped = true;
+    BOOL performOperation;
     if (operationButtonTapped)
     {
-        switch (tag) {
+        switch (tag)
+        {
             case 11: //division
                 input1 = _mainLabel.text;
-                
+                performOperation = true;
+                operationButtonTagValue = 11;
                 break;
                 
             case 12:  //multiplication
                 input1 = _mainLabel.text;
+                performOperation = true;
+                operationButtonTagValue = 12;
                 break;
             
             case 13:  //addition
                 input1 = _mainLabel.text;
+                performOperation = true;
+                operationButtonTagValue = 13;
                 break;
                 
             case 14:  //subtraction
                 input1 = _mainLabel.text;
+                performOperation = true;
+                operationButtonTagValue = 14;
                 break;
                 
             default:
@@ -116,4 +136,80 @@
         }
     }
 }
+
+- (IBAction)equalsToIsTapped:(id)sender
+{
+    NSString *str1 = input1;
+    double theFirstOperandValue = [str1 floatValue];
+    NSString *str2 = input2;
+    double theSecondOperandValue = [str2 floatValue];
+    double answer;
+     if (equalToTapped == false)
+     {
+        switch (operationButtonTagValue)
+         {
+            case 11:
+                answer = theFirstOperandValue/theSecondOperandValue;
+                result = [NSString stringWithFormat:@"%f", answer];
+                _mainLabel.text = result;
+                equalToTapped = true;
+                break;
+
+            case 12:
+                answer = theFirstOperandValue*theSecondOperandValue;
+                result = [NSString stringWithFormat:@"%f", answer];
+                _mainLabel.text = result;
+                equalToTapped = true;
+                break;
+                
+            case 13:
+                answer = theFirstOperandValue+theSecondOperandValue;
+                result = [NSString stringWithFormat:@"%f", answer];
+                _mainLabel.text = result;
+                equalToTapped = true;
+                break;
+                
+            case 14:
+                answer = theFirstOperandValue-theSecondOperandValue;
+                result = [NSString stringWithFormat:@"%f", answer];
+                _mainLabel.text = result;
+                equalToTapped = true;
+                break;
+
+        }
+      }
+      else
+      {
+         NSString *tempResult1 = result;
+         answer = [tempResult1 floatValue];
+         switch (operationButtonTagValue)
+         {
+             case 11:
+                 answer = answer/theSecondOperandValue;
+                 result = [NSString stringWithFormat:@"%f", answer];
+                 _mainLabel.text = result;
+                 break;
+                 
+             case 12:
+                 answer = answer*theSecondOperandValue;
+                 result = [NSString stringWithFormat:@"%f", answer];
+                 _mainLabel.text = result;
+                 break;
+                 
+             case 13:
+                 answer = answer+theSecondOperandValue;
+                 result = [NSString stringWithFormat:@"%f", answer];
+                 _mainLabel.text = result;
+                 break;
+                 
+             case 14:
+                 answer = answer-theSecondOperandValue;
+                 result = [NSString stringWithFormat:@"%f", answer];
+                 _mainLabel.text = result;
+                 break;
+           }
+      }
+}
+
+
 @end
