@@ -216,7 +216,7 @@
     NSString *str2 = input2;
     double theSecondOperandValue = [str2 floatValue];
     
-    if (theSecondOperandValue != 0)
+    if (theSecondOperandValue != 0)      //To make Tapping on = function like calculator
     {
         theSecondOperandValue = theSecondOperandValue;
     }
@@ -294,6 +294,14 @@
       }
 }
 
-
+#pragma mark- Percentage Operator 
+- (IBAction)percentageButtonTapped:(id)sender
+{
+    NSString *temp = self.mainLabel.text;
+    double percentage = [temp floatValue];
+    percentage = percentage/100 ;
+    result = [NSString stringWithFormat:@"%g", percentage];
+    _mainLabel.text = result;
+}
 
 @end
