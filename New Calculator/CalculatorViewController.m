@@ -1,5 +1,5 @@
 //
-//  ViewController.m
+//  CalculatorController.m
 //  New Calculator
 //
 //  Created by Sky on 3/26/15.
@@ -90,7 +90,8 @@
 
 #pragma mark- ClearButtonIsTapped
 // A/C button on calculator to reset the calculator & display
-- (IBAction)clearTapped:(id)sender {
+- (IBAction)clearTapped:(id)sender
+{
     self.mainLabel.text = @"0";
     result = @"0";
     input1 = @"0";
@@ -140,7 +141,6 @@
 }
 
 #pragma mark- SignChangeOperatorTapped
-
  - (IBAction)signChangeOperatorTapped:(id)sender
  {
 
@@ -166,8 +166,6 @@
          }
      }
  }
-
-
 
 #pragma mark- DecimalButtonTapped
 - (IBAction)decimalButtonTapped:(id)sender
@@ -206,15 +204,10 @@
 #pragma mark- EqualToButtonTapped
 - (IBAction)equalsToIsTapped:(id)sender
 {
-    
-
-    
-    
     NSString *str1 = input1;
-    double theFirstOperandValue = [str1 floatValue];
- //input2 = input1;
+    long double theFirstOperandValue = [str1 floatValue];
     NSString *str2 = input2;
-    double theSecondOperandValue = [str2 floatValue];
+    long double theSecondOperandValue = [str2 floatValue];
     
     if (theSecondOperandValue != 0)      //To make Tapping on = function like calculator
     {
@@ -224,41 +217,39 @@
     {
         theSecondOperandValue = theFirstOperandValue;
     }
-
     
-    double answer;
+    long double answer;
      if (equalToTapped == false)
      {
         switch (operationButtonTagValue)
          {
             case 11:
                 answer = theFirstOperandValue/theSecondOperandValue;
-                result = [NSString stringWithFormat:@"%g", answer];
+                result = [NSString stringWithFormat:@"%Lg", answer];
                 _mainLabel.text = result;
                 equalToTapped = true;
                 break;
 
             case 12:
                 answer = theFirstOperandValue*theSecondOperandValue;
-                result = [NSString stringWithFormat:@"%g", answer];
+                result = [NSString stringWithFormat:@"%Lg", answer];
                 _mainLabel.text = result;
                 equalToTapped = true;
                 break;
                 
             case 13:
                 answer = theFirstOperandValue+theSecondOperandValue;
-                result = [NSString stringWithFormat:@"%g", answer];
+                result = [NSString stringWithFormat:@"%Lg", answer];
                 _mainLabel.text = result;
                 equalToTapped = true;
                 break;
                 
             case 14:
                 answer = theFirstOperandValue-theSecondOperandValue;
-                result = [NSString stringWithFormat:@"%g", answer];
+                result = [NSString stringWithFormat:@"%Lg", answer];
                 _mainLabel.text = result;
                 equalToTapped = true;
                 break;
-
         }
       }
       else
@@ -269,38 +260,38 @@
          {
              case 11:
                  answer = answer/theSecondOperandValue;
-                 result = [NSString stringWithFormat:@"%g", answer];
+                 result = [NSString stringWithFormat:@"%Lg", answer];
                  _mainLabel.text = result;
                  break;
                  
              case 12:
                  answer = answer*theSecondOperandValue;
-                 result = [NSString stringWithFormat:@"%g", answer];
+                 result = [NSString stringWithFormat:@"%Lg", answer];
                  _mainLabel.text = result;
                  break;
                  
              case 13:
                  answer = answer+theSecondOperandValue;
-                 result = [NSString stringWithFormat:@"%g", answer];
+                 result = [NSString stringWithFormat:@"%Lg", answer];
                  _mainLabel.text = result;
                  break;
                  
              case 14:
                  answer = answer-theSecondOperandValue;
-                 result = [NSString stringWithFormat:@"%g", answer];
+                 result = [NSString stringWithFormat:@"%Lg", answer];
                  _mainLabel.text = result;
                  break;
            }
       }
 }
 
-#pragma mark- Percentage Operator 
+#pragma mark- Percentage Operator
 - (IBAction)percentageButtonTapped:(id)sender
 {
     NSString *temp = self.mainLabel.text;
-    double percentage = [temp floatValue];
+    long double percentage = [temp floatValue];
     percentage = percentage/100 ;
-    result = [NSString stringWithFormat:@"%g", percentage];
+    result = [NSString stringWithFormat:@"%Lg", percentage];
     _mainLabel.text = result;
 }
 
