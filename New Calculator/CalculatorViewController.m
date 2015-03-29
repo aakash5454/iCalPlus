@@ -29,11 +29,12 @@
     self.mainLabel.text = @"0";
     result = @"0";
     input1 = @"0";
-    input2 = @"0";
+    input2 = nil;
     operationButtonTapped = false;
     equalToTapped = false;
     decimalButtonTapped = false;
     operationButtonTapped = false;
+    operationButtonTagValue = 17;  // change1
 }
 
 - (void)didReceiveMemoryWarning {
@@ -95,11 +96,12 @@
     self.mainLabel.text = @"0";
     result = @"0";
     input1 = @"0";
-    input2 = @"0";
+    input2 = nil;
     operationButtonTapped = false;
     equalToTapped = false;
     decimalButtonTapped = false;
     operationButtonTapped = false;
+    operationButtonTagValue = 17;
 }
 
 #pragma mark- operationButtonTapped
@@ -158,7 +160,7 @@
                  _mainLabel.text = input1;
              }
             else  //This is input 2
-                 {
+            {
                  float temp = [self.mainLabel.text floatValue];
                  temp  = -(temp);
                  input2 = [NSString stringWithFormat:@"%g",temp];
@@ -190,6 +192,7 @@
            
             if (decimalButtonTapped == false) //decimal is tapped first time for input2
             {
+            input2 = @"0"; //Initilized to O, because . cannot to append to  input2=nil
             input2 = [input2 stringByAppendingString:@"."];
             _mainLabel.text = input2;
                                decimalButtonTapped = true;
@@ -209,7 +212,7 @@
     NSString *str2 = input2;
     long double theSecondOperandValue = [str2 floatValue];
     
-    if (theSecondOperandValue != 0)      //To make Tapping on = function like calculator
+    if (input2 != nil)      //To make Tapping on = function like calculator
     {
         theSecondOperandValue = theSecondOperandValue;
     }
@@ -219,7 +222,7 @@
     }
     
     long double answer;
-     if (equalToTapped == false)
+     if (equalToTapped == false)   //EqualToTapped First Time
      {
         switch (operationButtonTagValue)
          {
@@ -252,7 +255,7 @@
                 break;
         }
       }
-      else
+      else  //Equal to tapped second time
       {
          NSString *tempResult1 = result;
          answer = [tempResult1 floatValue];
@@ -293,6 +296,7 @@
     percentage = percentage/100 ;
     result = [NSString stringWithFormat:@"%Lg", percentage];
     _mainLabel.text = result;
+    operationButtonTagValue = 17;
 }
 
 @end
