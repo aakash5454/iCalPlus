@@ -35,6 +35,7 @@
     decimalButtonTapped = false;
     operationButtonTapped = false;
     operationButtonTagValue = 17;  // change1
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -116,7 +117,7 @@
 
     decimalButtonTapped = false;
     
-    input2 = @"0"; // Change1  added to start adding first digit of 2nd input to input2 
+    input2 = @"0"; // Change1  added to start adding first digit of 2nd input to input2
 
     
     if (operationButtonTapped)
@@ -215,15 +216,18 @@
     NSString *str2 = input2;
     long double theSecondOperandValue = [str2 floatValue];
     
-    if (input2 != nil)      //To make Tapping on = function like calculator
-    {
-        theSecondOperandValue = theSecondOperandValue;
-    }
-    else
+//    if (input2 != nil)      //To make Tapping on = function like calculator  //was != nil
+//    {
+//        theSecondOperandValue = theSecondOperandValue;
+//    }
+     if ([input2 isEqual:@"0"])  // was else
     {
         theSecondOperandValue = theFirstOperandValue;
     }
-    
+    else
+    {
+        theSecondOperandValue = theSecondOperandValue;
+    }
     long double answer;
      if (equalToTapped == false)   //EqualToTapped First Time
      {
