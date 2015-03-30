@@ -67,13 +67,13 @@
     }
     else                //This is input2
     {
-       
         UIButton *numberButton = (id) sender;
         NSUInteger tag = numberButton.tag;
         NSString *tempBuffer1 = [NSString stringWithFormat:@"%lu",(unsigned long)tag];
-        if ([self.mainLabel.text isEqual: input1])                //first digit of second number entered
+        NSLog(@"self.MainLabel.text %@", self.mainLabel.text);
+        if ([input2 isEqual: @"0"])                //first digit of second number entered
         {
-            input2 = @"0";
+           // input2 = tempBuffer1;//was @"0"
             input2 = [input2 substringFromIndex:1];
             input2 = [input2 stringByAppendingString:tempBuffer1];
             _mainLabel.text = input2;
@@ -115,6 +115,9 @@
     operationButtonTapped = true;
 
     decimalButtonTapped = false;
+    
+    input2 = @"0"; // Change1  added to start adding first digit of 2nd input to input2 
+
     
     if (operationButtonTapped)
     {
@@ -192,7 +195,7 @@
            
             if (decimalButtonTapped == false) //decimal is tapped first time for input2
             {
-            input2 = @"0"; //Initilized to O, because . cannot to append to  input2=nil
+            input2 = @"0"; //Initilized to O, because . we cannot append anything to  input2=nil
             input2 = [input2 stringByAppendingString:@"."];
             _mainLabel.text = input2;
                                decimalButtonTapped = true;
