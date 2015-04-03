@@ -192,14 +192,14 @@ typedef enum
 #pragma mark- EqualToButtonTapped
 - (IBAction)equalsToIsTapped:(id)sender
 {
-   operationButtonTapped = false; // Attempt to solve #7 because u want next input to be input1.
+   operationButtonTapped = false; //To solve #7 because u want next input to be input1.
     
     static NSString *input11;
     static NSString *input22;
     long double answer;
-    answer = 0; //change 2
+    answer = [input1 floatValue]; //added so that operation:5 =  is equal to 5
     
-    if (equalToTapped == false)  //EqualToTapped for the First Time //     if (equalToTapped == false)
+    if (equalToTapped == false)  //EqualToTapped for the First Time //
      {
          NSString *str1 = input1;
          long double theFirstOperandValue = [str1 floatValue];
