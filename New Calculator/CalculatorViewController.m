@@ -151,7 +151,13 @@ typedef enum
                  input2 = [NSString stringWithFormat:@"%g",temp];
                  _mainLabel.text = input2;
          }
+            //Added to check so you cannot get -0
+            if ([input1  isEqual: @"-0"] || [input2 isEqual:@"-0"])
+            {
+                self.mainLabel.text = @"0";
+            }
      }
+     
  }
 
 #pragma mark- DecimalButtonTapped
@@ -177,7 +183,11 @@ typedef enum
            
             if (decimalButtonTapped == false) //decimal is tapped first time for input2
             {
-//                input2 = @"0"; //Initilized to O, because . we cannot append anything to  input2=nil
+
+                if (input2 == nil)
+                {
+                    input2 = @"0"; //Initilized to O, because we cannot append anything when input2=nil
+                }
                 input2 = [input2 stringByAppendingString:@"."];
                 _mainLabel.text = input2;
                 decimalButtonTapped = true;
