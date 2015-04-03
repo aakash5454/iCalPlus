@@ -139,16 +139,16 @@ typedef enum
      }
      else
         {
-            float temp = [self.mainLabel.text floatValue];
+            long double temp = [self.mainLabel.text longLongValue];
             temp  = -(temp);
             if (operationButtonTapped == false)  //This is input1
              {
-                 input1 = [NSString stringWithFormat:@"%g",temp];
+                 input1 = [NSString stringWithFormat:@"%Lg",temp];
                  _mainLabel.text = input1;
              }
             else  //This is input 2
             {
-                 input2 = [NSString stringWithFormat:@"%g",temp];
+                 input2 = [NSString stringWithFormat:@"%Lg",temp];
                  _mainLabel.text = input2;
          }
             //Added to check so you cannot get -0
@@ -207,14 +207,14 @@ typedef enum
     static NSString *input11;
     static NSString *input22;
     long double answer;
-    answer = [input1 floatValue]; //added so that operation:5 =  is equal to 5
+    answer = [input1 longLongValue]; //added so that operation:5 =  is equal to 5
     
     if (equalToTapped == false)  //EqualToTapped for the First Time //
      {
          NSString *str1 = input1;
-         long double theFirstOperandValue = [str1 floatValue];
+         long double theFirstOperandValue = [str1 longLongValue];
          NSString *str2 = input2;
-         long double theSecondOperandValue = [str2 floatValue];
+         long double theSecondOperandValue = [str2 longLongValue];
          
          if (input2 == nil)  //when input2 is nil
          {
@@ -270,10 +270,10 @@ typedef enum
     else  //Equal to tapped second time
     {
         NSString *str2 = input22;
-        long double theSecondOperandValue = [str2 floatValue];
+        long double theSecondOperandValue = [str2 longLongValue];
         
          NSString *tempResult1 = result;
-         answer = [tempResult1 floatValue];
+         answer = [tempResult1 longLongValue];
          switch (operationButtonTagValue)
          {
              case DIVISION:
@@ -311,7 +311,7 @@ typedef enum
     if (operationButtonTapped == false)       //This is input1 and percentage is tapped (only input1 is given)
     {
         NSString *temp = self.mainLabel.text;
-        long double percentage = [temp floatValue];
+        long double percentage = [temp longLongValue];
         percentage = percentage/100 ;
         input1 = [NSString stringWithFormat:@"%Lg", percentage];
         _mainLabel.text = input1;
@@ -319,7 +319,7 @@ typedef enum
     else    //This is input2, and percentage of input2 is tapped (both inputs given)
     {
         NSString *temp = self.mainLabel.text;
-        long double percentage = [temp floatValue];
+        long double percentage = [temp longLongValue];
         percentage = percentage/100 ;
         input2 = [NSString stringWithFormat:@"%Lg", percentage];
         _mainLabel.text = input2;
