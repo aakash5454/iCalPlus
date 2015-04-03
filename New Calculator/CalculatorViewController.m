@@ -47,6 +47,7 @@ typedef enum
 // Tapping on any Numeric Button from 0-9 using tag values
 - (IBAction)buttonTapped:(id)sender
 {
+    equalToTapped = false;
     UIButton *numberButton = (id) sender;
     NSUInteger tag = numberButton.tag;
     NSString *tempBuffer1 = [NSString stringWithFormat:@"%lu",(unsigned long)tag];
@@ -62,24 +63,15 @@ typedef enum
     }
     else                //This is input2
     {
-        NSLog(@"self.MainLabel.text %@", self.mainLabel.text);
-       
         if (input2 ==  nil)                //first digit of second number entered
         {
-           // input2 = tempBuffer1;//was @"0"
             input2 = @"a";
-           input2 = [input2 substringFromIndex:1];
-           NSLog(@"inside input2 isEqual: nil");
+            input2 = [input2 substringFromIndex:1];
         }
         
             input2 = [input2 stringByAppendingString:tempBuffer1];
             _mainLabel.text = input2;
             NSLog(@"Complete input 2 is: %@", input2);
-        
-//        if ([input2 isEqual:nil]) //Change2
-//        {
-//            input2IsNil = true;
-//        }
     }
  
 }
@@ -96,6 +88,7 @@ typedef enum
     equalToTapped = false;
     decimalButtonTapped = false;
     operationButtonTagValue = 17;  //Tag value that is greater than all the values used.
+    input2IsNil = false;
 }
 
 #pragma mark- operationButtonTapped
@@ -105,10 +98,8 @@ typedef enum
     UIButton *operationButton = (id) sender;
     NSUInteger tag = operationButton.tag;
     input1 = _mainLabel.text;
-    operationButtonTapped = true;
+    operationButtonTapped = true; //So that next number entered is input2
     decimalButtonTapped = false;
-    
-   // input2 = @"0"; // Change1  added to start adding first digit of 2nd input to input2
     
     if (operationButtonTapped)
     {
@@ -198,35 +189,46 @@ typedef enum
 #pragma mark- EqualToButtonTapped
 - (IBAction)equalsToIsTapped:(id)sender
 {
-    operationButtonTapped = false; // Attempt to solve #7
-    NSString *str1 = input1;
-    long double theFirstOperandValue = [str1 floatValue];
-    NSString *str2 = input2;
-    long double theSecondOperandValue = [str2 floatValue];
-    NSLog(@"start checking");
+   operationButtonTapped = false; // Attempt to solve #7 because u want next input to be input1.
     
-
-//    if (input2IsNil == true)  //when input2 is not provided
+//    NSString *str1 = input1;
+//    long double theFirstOperandValue = [str1 floatValue];
+//    NSString *str2 = input2;
+//    long double theSecondOperandValue = [str2 floatValue];
+//   // double forTheSecondvalue = theSecondOperandValue;
+    
+//    if (input2 == nil)  //when input2 is nil
 //    {
-//        NSLog(@"in if");
-//            theSecondOperandValue = theFirstOperandValue; //To maintain normal calculator behaviour i.e take input2 equals to input1 when input2 is not provided and = is tapped.
+//        input2IsNil = true;
+//        theSecondOperandValue = theFirstOperandValue; //Store 1st operand value in 2nd...To maintain normal calculator behaviour i.e take input2 equals to input1 when input2 is not provided and = is tapped.
 //    }
-    if (input2 == nil)  //when input2 is nil
-    {
-        theSecondOperandValue = theFirstOperandValue;
-                NSLog(@"in if");
-    }
-    else
-    {
-        NSLog(@"in else");
-
-        theSecondOperandValue = theSecondOperandValue; //When input2 is provided.
+//    else
+//    {
+       // theSecondOperandValue = theSecondOperandValue; //When input2 is provided.
+  //  }
     
-    }
+   static NSString *input11;
+    static NSString *input22;
     long double answer;
-    //answer = 0; //change 2
-     if (equalToTapped == false)  //EqualToTapped for the First Time
+    answer = 0; //change 2
+    
+     if (equalToTapped == false)  //EqualToTapped for the First Time //     if (equalToTapped == false)
      {
+         NSString *str1 = input1;
+         long double theFirstOperandValue = [str1 floatValue];
+         NSString *str2 = input2;
+         long double theSecondOperandValue = [str2 floatValue];
+         
+         if (input2 == nil)  //when input2 is nil
+         {
+             input2IsNil = true;
+             theSecondOperandValue = theFirstOperandValue; //Store 1st operand value in 2nd...To maintain normal calculator behaviour i.e take input2 equals to input1 when input2 is not provided and = is tapped.
+         }
+         else
+         {
+             theSecondOperandValue = theSecondOperandValue;
+         }
+         
         switch (operationButtonTagValue)
          {
             case DIVISION:
@@ -250,10 +252,40 @@ typedef enum
          result = [NSString stringWithFormat:@"%Lg", answer];
          _mainLabel.text = result;
          equalToTapped = true;
-      }
+         
+         if (input2IsNil == true)
+         {
+             input22 = [NSString stringWithFormat:@"%Lg", theSecondOperandValue];
+             input2=nil;
+             input2IsNil = false;
+             
+         }
+         else
+         {
+             input11= [NSString stringWithFormat:@"%Lg", theFirstOperandValue];
+             input22= [NSString stringWithFormat:@"%Lg", theSecondOperandValue];
+             input2 = nil;
+             input1 = @"0";
+         }
+      
+     }
       else  //Equal to tapped second time
       {
-         NSString *tempResult1 = result;
+       
+          NSString *str1 = input11;
+         long double theFirstOperandValue = [str1 floatValue];
+          NSString *str2 = input22;
+          long double theSecondOperandValue = [str2 floatValue];
+          
+//          if (input22 == nil)  //when input2 is nil
+//          {
+//              input2IsNil = true;
+//              theSecondOperandValue = theFirstOperandValue; //Store 1st operand value in 2nd...To maintain normal calculator behaviour i.e take input2 equals to input1 when input2 is not provided and = is tapped.
+//          }
+
+          
+          
+          NSString *tempResult1 = result;
          answer = [tempResult1 floatValue];
          switch (operationButtonTagValue)
          {
@@ -282,6 +314,7 @@ typedef enum
                  break;
            }
       }
+    NSLog(@"result is %@", result);
 }
 
 #pragma mark- Percentage Operator
