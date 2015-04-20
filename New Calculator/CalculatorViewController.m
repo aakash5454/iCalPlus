@@ -95,6 +95,10 @@ typedef enum
 //Uses Tag value of operators to decide which operation to perform
 - (IBAction)operationButtonTapped:(id)sender
 {
+    if (input2) //added to fix #7
+    {
+        [self equalsToIsTapped:sender];
+    }
     UIButton *operationButton = (id) sender;
     NSUInteger tag = operationButton.tag;
     input1 = _mainLabel.text;
@@ -132,14 +136,21 @@ typedef enum
  {
      if (operationButtonTapped == true)   //Added becasue input1=@"0" when operation button is tapped.
      {
-         if ([input1  isEqual: @"0"])
+         long double temp = [self.mainLabel.text doubleValue];
+         temp  = -(temp);
+        if (temp)
+        {
+            input1 = [NSString stringWithFormat:@"%Lg",temp];
+                 self.mainLabel.text = input1;
+        }
+         else if ([input1  isEqual: @"0"])
              {
                  self.mainLabel.text = @"0";
              }
      }
      else
         {
-            long double temp = [self.mainLabel.text longLongValue];
+            long double temp = [self.mainLabel.text doubleValue];
             temp  = -(temp);
             if (operationButtonTapped == false)  //This is input1
              {
@@ -151,7 +162,7 @@ typedef enum
                  input2 = [NSString stringWithFormat:@"%Lg",temp];
                  _mainLabel.text = input2;
          }
-            //Added to check so you cannot get -0
+            //Added to check so you cannot get -0. Important feature of this calculator
             if ([input1  isEqual: @"-0"] || [input2 isEqual:@"-0"])
             {
                 self.mainLabel.text = @"0";
@@ -202,28 +213,24 @@ typedef enum
 #pragma mark- EqualToButtonTapped
 - (IBAction)equalsToIsTapped:(id)sender
 {
-   operationButtonTapped = false; //To solve #7 because u want next input to be input1.
-    
-    static NSString *input11;
-    static NSString *input22;
+   //operationButtonTapped = false; //To solve #7 because u want next input to be input1.
+     //commented the above line after making change in operatioButtontapped to fix #7.
+    static NSString *input11;   //Temp variable use when = is tapped 2nd time or more
+    static NSString *input22;   //Temp variable use when = is tapped 2nd time or more
     long double answer;
-    answer = [input1 longLongValue]; //added so that operation:5 =  is equal to 5
+    answer = [input1 doubleValue]; //added so that operation: 5 =  is equal to 5
     
     if (equalToTapped == false)  //EqualToTapped for the First Time //
      {
          NSString *str1 = input1;
-         long double theFirstOperandValue = [str1 longLongValue];
+         long double theFirstOperandValue = [str1 doubleValue];
          NSString *str2 = input2;
-         long double theSecondOperandValue = [str2 longLongValue];
+         long double theSecondOperandValue = [str2 doubleValue];
          
          if (input2 == nil)  //when input2 is nil
          {
              input2IsNil = true;
              theSecondOperandValue = theFirstOperandValue; //Store 1st operand value in 2nd...To maintain normal calculator behaviour i.e take input2 equals to input1 when input2 is not provided and = is tapped.
-         }
-         else
-         {
-             theSecondOperandValue = theSecondOperandValue;
          }
          
         switch (operationButtonTagValue)
@@ -248,7 +255,7 @@ typedef enum
          }
          
          result = [NSString stringWithFormat:@"%Lg", answer];
-         _mainLabel.text = result;
+         _mainLabel.text = result;  // To update result on screen
          equalToTapped = true;
          
          if (input2IsNil == true)
@@ -270,36 +277,31 @@ typedef enum
     else  //Equal to tapped second time
     {
         NSString *str2 = input22;
-        long double theSecondOperandValue = [str2 longLongValue];
+        long double theSecondOperandValue = [str2 doubleValue];
         
          NSString *tempResult1 = result;
-         answer = [tempResult1 longLongValue];
+         answer = [tempResult1 doubleValue];
          switch (operationButtonTagValue)
          {
              case DIVISION:
                  answer = answer/theSecondOperandValue;
-                 result = [NSString stringWithFormat:@"%Lg", answer];
-                 _mainLabel.text = result;
                  break;
                  
              case MULTIPLICATION:
                  answer = answer*theSecondOperandValue;
-                 result = [NSString stringWithFormat:@"%Lg", answer];
-                 _mainLabel.text = result;
                  break;
                  
              case ADDITION:
                  answer = answer+theSecondOperandValue;
-                 result = [NSString stringWithFormat:@"%Lg", answer];
-                 _mainLabel.text = result;
                  break;
+
                  
              case SUBTRACTION:
                  answer = answer-theSecondOperandValue;
-                 result = [NSString stringWithFormat:@"%Lg", answer];
-                 _mainLabel.text = result;
                  break;
            }
+        result = [NSString stringWithFormat:@"%Lg", answer];
+        _mainLabel.text = result;
       }
     NSLog(@"result is %@", result);
 }
@@ -307,11 +309,13 @@ typedef enum
 #pragma mark- Percentage Operator
 - (IBAction)percentageButtonTapped:(id)sender
 {
-    decimalButtonTapped = true; // added so that 4 % = 0.04 and then no one can tap decimal
+   if (!equalToTapped)
+   {
+    decimalButtonTapped = true; // added so that 4 % = 0.04 and then no one can tap decimal   
     if (operationButtonTapped == false)       //This is input1 and percentage is tapped (only input1 is given)
     {
         NSString *temp = self.mainLabel.text;
-        long double percentage = [temp longLongValue];
+        long double percentage = [temp doubleValue]; //change to double from longLongValue
         percentage = percentage/100 ;
         input1 = [NSString stringWithFormat:@"%Lg", percentage];
         _mainLabel.text = input1;
@@ -319,12 +323,23 @@ typedef enum
     else    //This is input2, and percentage of input2 is tapped (both inputs given)
     {
         NSString *temp = self.mainLabel.text;
-        long double percentage = [temp longLongValue];
+        long double percentage = [temp doubleValue];
         percentage = percentage/100 ;
         input2 = [NSString stringWithFormat:@"%Lg", percentage];
         _mainLabel.text = input2;
-        [self equalsToIsTapped:sender];       //To get the result as soon as Percentage is tapped without user to tap equals to.
+        [self equalsToIsTapped:sender];       //To get the result as soon as Percentage is tapped without user to tap equals to. Have to do this because % is a single operand, operator. This is a feature from user Experience point of view.
     }
+       
+   }
+   else //added to fix unreported decimal bug.
+   {
+       NSString *temp = self.mainLabel.text;
+       long double percentage = [temp doubleValue]; //change to double from longLongValue
+       percentage = percentage/100 ;
+       input1 = [NSString stringWithFormat:@"%Lg", percentage];
+       _mainLabel.text = input1;
+       equalToTapped = true;
+   }
 }
 
 @end
